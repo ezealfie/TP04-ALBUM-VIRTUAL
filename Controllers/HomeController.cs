@@ -25,6 +25,11 @@ public class HomeController : Controller
     }
     public IActionResult Sobre()
     {
+  List<Figurita> figuritas = bd.DevolverFiguritas();
+  
+  
+     Random rnd = new Random;
+     rnd.next(figuritas.count()-1);
         return View();
     }
     public IActionResult Privacy()

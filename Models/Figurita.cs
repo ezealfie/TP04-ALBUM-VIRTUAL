@@ -7,24 +7,24 @@ namespace TP04_ALBUM.Models
 {
     public class Figurita
     {
-        public int id { get; set; }
+        public int idFigurita { get; set; }
         public string img { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }
-        public int FKEquipo { get; set; }
+        public int idSeleccion { get; set; }
         public string numeroCamiseta { get; set; }
 
-        public Figurita()
+        public Figurita() 
         {
 
         }
-        public Figurita(int id, string img, string nombre, string descripcion, int FKEquipo, string numeroCamiseta)
+        public Figurita(int idFigurita, string img, string nombre, string descripcion, int idSeleccion, string numeroCamiseta)
         {
-            this.id = id;
+            this.idFigurita = idFigurita;
             this.img = img;
             this.nombre = nombre;
             this.descripcion = descripcion;
-            this.FKEquipo = FKEquipo;
+            this.idSeleccion = idSeleccion;
             this.numeroCamiseta = numeroCamiseta;
         }
 
