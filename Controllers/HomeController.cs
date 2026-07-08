@@ -25,13 +25,31 @@ public class HomeController : Controller
     }
     public IActionResult Sobre()
     {
-  List<Figurita> figuritas = bd.DevolverFiguritas();
-  
-  
-     Random rnd = new Random;
-     rnd.next(figuritas.count()-1);
-        return View();
+        BD bd = new BD();
+
+        List<Figurita> figuritas = bd.DevolverFiguritas();
+
+
+        Random rnd = new Random();
+        int maximo = figuritas.Count() - 1;
+        List<int> figuritasSobre = new List<int>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            figuritasSobre.Add(rnd.Next(maximo));
+        }
+
+
+        return RedirectToAction("GuardarSobres", figuritasSobre);
     }
+
+    public IActionResult GuardarSobres(List<int> figuritasSobre)
+    {
+        BD bd = new BD();
+        bd.agregarFiguritas(figuritasSobre);
+        return View("Sobre");
+    }
+
     public IActionResult Privacy()
     {
         return View();

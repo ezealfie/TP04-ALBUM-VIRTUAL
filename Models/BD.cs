@@ -43,6 +43,16 @@ namespace TP04_ALBUM.Models
             }
             return figuritas;
         }
+        public void agregarFiguritas(List<int> figuritas)
+        {
+              using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                foreach(int figurita in figuritas){
+                string query = "UPDATE FiguritaXUsuario SET cantidad = cantidad+1 WHERE idFigurita = '@pfigurita'";
+                connection.Execute(query, new {pfigurita = figurita});
+                }
+            }
+        }
     }
 
 }
