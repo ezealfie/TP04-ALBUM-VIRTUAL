@@ -9,25 +9,15 @@ namespace TP04_ALBUM.Models
     {
         public int id { get; set; }
         public string nombre { get; set; }
- 
 
-
-        public Figurita()
+        public Selecciones()
         {
             
-           
         }
-
-
-        public Figurita(int id, string nombre)
+        public Selecciones(int id, string nombre)
         {
             this.id = id;
             this.nombre = nombre;
-           
         }
-
-
-
-
     }
 }

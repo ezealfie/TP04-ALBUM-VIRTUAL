@@ -13,23 +13,36 @@ namespace TP04_ALBUM.Models
 
         private string _connectionString = @"Server=localhost; DataBase=Album; Integrated Security=True; TrustServerCertificate=True;";
 
-        public List<Figurita> devolverFiguritas()
+        public List<Figurita> DevolverFiguritas()
         {
-            List<FiguritasXUsuario> figuritasXUsuario = new List<figuritasXUsuario>; 
-            using (SqlConnection connection = new SqlConnection(_connectionString)){
-                string query = "SELECT idFig FROM FiguritasXUsuario";
-                FiguritasXUsuario= connection.Query<Selecciones>(query).ToList(); 
+            List<Figurita> figuritas = new List<Figurita>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM Figuritas";
+                figuritas = connection.Query<Figurita>(query).ToList();
             }
+            return figuritas;
         }
-          public List<Selecciones> devolverSelecciones()
+        public List<Selecciones> DevolverSelecciones()
         {
-            List<Selecciones> selecciones = new list<selecciones>; 
-            using (SqlConnection connection = new SqlConnection(_connectionString)){
-                string query = "SELECT idFig FROM Selecciones";
-                selecciones = connection.Query<Selecciones>(query).ToList(); 
+            List<Selecciones> selecciones = new List<Selecciones>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM Selecciones";
+                selecciones = connection.Query<Selecciones>(query).ToList();
             }
+            return selecciones;
         }
-
+        public List<FiguritaXUsuario> DevolverFiguritasXUsuario()
+        {
+            List<FiguritaXUsuario> figuritas = new List<FiguritaXUsuario>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM FiguritaXUsuario";
+                figuritas = connection.Query<FiguritaXUsuario>(query).ToList();
+            }
+            return figuritas;
+        }
     }
 
 }

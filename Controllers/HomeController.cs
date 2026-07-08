@@ -17,7 +17,16 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    public IActionResult Album()
+    {
+        BD bd = new BD();
+        ViewBag.Figuritas = bd.DevolverFiguritas();
+        return View();
+    }
+    public IActionResult Sobre()
+    {
+        return View();
+    }
     public IActionResult Privacy()
     {
         return View();
