@@ -7,16 +7,16 @@ namespace TP04_ALBUM.Models
 {
     public class FiguritaXUsuario
     {
-        public int id { get; set; }
+        public int idFiguritasXUsuario { get; set; }
         public int cantidad { get; set; }
         public int idFigurita { get; set; }
         public FiguritaXUsuario()
         {
 
         }
-        public FiguritaXUsuario(int id, int cantidad, int idFigurita)
+        public FiguritaXUsuario(int idFiguritasXUsuario, int cantidad, int idFigurita)
         {
-            this.id = id;
+            this.idFiguritasXUsuario = idFiguritasXUsuario;
             this.cantidad = cantidad;
             this.idFigurita = idFigurita;
         }
