@@ -10,9 +10,20 @@ h1
   justify-content: center;
 }
 
-.opcionInicio
-{
+.opcionInicio {
+  display: inline-block;
+  background: silver;
+  color: black;
   border: 1px solid black;
-  padding: 2%;
   margin-left: 2%;
+  padding: 15px 28px;
+  border-radius: 999px;
+  font-size: 17px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.opcionInicio:hover {
+  background: gold;
+  transform: translateY(-3px);
 }
