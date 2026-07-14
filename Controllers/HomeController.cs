@@ -38,15 +38,24 @@ public class HomeController : Controller
         {
             figuritasSobre.Add(rnd.Next(maximo));
         }
+    System.Console.WriteLine(figuritasSobre.Count);
 
 
-        return RedirectToAction("GuardarSobres", figuritasSobre);
+        return RedirectToAction("GuardarSobres", new {figuritasSobre});
     }
 
     public IActionResult GuardarSobres(List<int> figuritasSobre)
     {
         BD bd = new BD();
+        List<Figurita> Figuritas = new List<Figurita>();
+        System.Console.WriteLine(figuritasSobre.Count);
         bd.agregarFiguritas(figuritasSobre);
+        foreach (int figurita in figuritasSobre)
+        {
+        Figuritas.Add(bd.DevolverFigurita(figurita));
+        }
+    System.Console.WriteLine(Figuritas.Count);
+        ViewBag.figuritas = Figuritas;
         return View("Sobre");
     }
 

@@ -1,1 +1,10 @@
-<h1>hola<h1>
+@using System.Security.Cryptography
+@{
+    ViewData["Title"] = "Sobre abierto";
+}
+<h1>@ViewData["Title"]</h1>
+
+@foreach(Figurita figurita in ViewBag.figuritas){
+    <h4>@figurita.nombre</h4>
+    <img src="/@figurita.img" alt="Figurita">
+}
