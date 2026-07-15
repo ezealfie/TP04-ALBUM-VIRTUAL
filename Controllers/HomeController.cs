@@ -17,13 +17,6 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult Album()
-    {
-        BD bd = new BD();
-        ViewBag.Album = bd.DevolverAlbum();
-        ViewBag.Figuritas = bd.DevolverFiguritas();
-        return View();
-    }
     public IActionResult Sobre()
     {
         BD bd = new BD();
@@ -45,9 +38,23 @@ public class HomeController : Controller
     /*public IActionResult GuardarSobres(List<int> figuritasSobre)
     {
         BD bd = new BD();
+        List<Figurita> Figuritas = new List<Figurita>();
+        System.Console.WriteLine(figuritasSobre.Count);
         bd.agregarFiguritas(figuritasSobre);
+        foreach (int figurita in figuritasSobre)
+        {
+        Figuritas.Add(bd.DevolverFigurita(figurita));
+        }
+    System.Console.WriteLine(Figuritas.Count);
+        ViewBag.figuritas = Figuritas;
         return View("Sobre");
     }*/
+    public IActionResult Album()
+    {
+        BD bd = new BD();
+        ViewBag.Figuritas = bd.DevolverAlbum();
+        return View();
+    }
 
     public IActionResult Privacy()
     {
