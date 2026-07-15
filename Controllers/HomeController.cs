@@ -20,35 +20,34 @@ public class HomeController : Controller
     public IActionResult Album()
     {
         BD bd = new BD();
+        ViewBag.Album = bd.DevolverAlbum();
         ViewBag.Figuritas = bd.DevolverFiguritas();
         return View();
     }
     public IActionResult Sobre()
     {
         BD bd = new BD();
-
         List<Figurita> figuritas = bd.DevolverFiguritas();
-
-
         Random rnd = new Random();
-        int maximo = figuritas.Count() - 1;
-        List<int> figuritasSobre = new List<int>();
-
-        for (int i = 0; i < 5; i++)
+        List<Figurita> sobre = new List<Figurita>();
+        while (sobre.Count < 5)
         {
-            figuritasSobre.Add(rnd.Next(maximo));
+            Figurita f = figuritas[rnd.Next(figuritas.Count)];
+            if (!sobre.Contains(f))
+            {
+                sobre.Add(f);
+            }
         }
-
-
-        return RedirectToAction("GuardarSobres", figuritasSobre);
+        ViewBag.Sobre = sobre;
+        return View();
     }
 
-    public IActionResult GuardarSobres(List<int> figuritasSobre)
+    /*public IActionResult GuardarSobres(List<int> figuritasSobre)
     {
         BD bd = new BD();
         bd.agregarFiguritas(figuritasSobre);
         return View("Sobre");
-    }
+    }*/
 
     public IActionResult Privacy()
     {

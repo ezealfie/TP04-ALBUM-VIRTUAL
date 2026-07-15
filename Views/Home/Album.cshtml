@@ -1,0 +1,9 @@
+<h1>Mi Álbum</h1>
+@foreach(var f in ViewBag.Figuritas)
+{
+    <div class="figurita">
+        <img src="@f.img" width="150">
+        <h3>Nombre del jugador: @f.nombre</h3>
+        <p>Número de camiseta: @f.numeroCamiseta</p>
+    </div>
+}

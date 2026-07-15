@@ -48,10 +48,20 @@ namespace TP04_ALBUM.Models
               using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 foreach(int figurita in figuritas){
-                string query = "UPDATE FiguritaXUsuario SET cantidad = cantidad+1 WHERE idFigurita = '@pfigurita'";
+                string query = "UPDATE FiguritaXUsuario SET cantidad = cantidad + 1 WHERE idFigurita = @pfigurita";
                 connection.Execute(query, new {pfigurita = figurita});
                 }
             }
+        }
+        public List<FiguritaXUsuario> DevolverAlbum()
+        {
+            List<FiguritaXUsuario> album = new List<FiguritaXUsuario>();
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM FiguritaXUsuario";
+                album = connection.Query<FiguritaXUsuario>(query).ToList();
+            }
+            return album;
         }
     }
 
