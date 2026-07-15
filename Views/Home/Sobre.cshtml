@@ -1,9 +1,19 @@
-<h1>Tu Sobre</h1>
-@foreach(var f in ViewBag.Sobre)
-{
-    <div>
-        <img src="@f.img" width="150">
-        <h3>@f.nombre</h3>
-        <p>@f.numeroCamiseta</p>
-    </div>
-}
+<a href="@Url.Action("Index", "Home")" class="btn-volver">← Volver al inicio</a>
+
+<div class="sobre-header">
+    <h1>¡Tu Sobre!</h1>
+    <p class="sobre-subtitulo">Estas son las 5 figuritas que te tocaron</p>
+</div>
+
+<div class="sobre-container">
+    @foreach (Figurita f in ViewBag.Sobre)
+    {
+        <div class="sobre-card">
+            <div class="sobre-card-inner">
+                <img src="/@f.img" width="150">
+                <h3>@f.nombre</h3>
+                <p class="sobre-numero">@f.numeroCamiseta</p>
+            </div>
+        </div>
+    }
+</div>

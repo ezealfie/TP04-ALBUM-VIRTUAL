@@ -18,7 +18,7 @@ namespace TP04_ALBUM.Models
             List<Figurita> figuritas = new List<Figurita>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM Figuritas";
+                string query = @"SELECT f.* FROM Figuritas f INNER JOIN Selecciones s ON f.idSeleccion = s.idSeleccion ORDER BY s.nombre";
                 figuritas = connection.Query<Figurita>(query).ToList();
             }
             return figuritas;
@@ -29,7 +29,7 @@ namespace TP04_ALBUM.Models
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 string query = "SELECT * FROM Figuritas WHERE idFiguritas = @pid";
-                figurita = connection.QueryFirstOrDefault<Figurita>(query, new {pid = figuritaid});
+                figurita = connection.QueryFirstOrDefault<Figurita>(query, new { pid = figuritaid });
             }
             return figurita;
 
@@ -40,7 +40,7 @@ namespace TP04_ALBUM.Models
             List<Selecciones> selecciones = new List<Selecciones>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM Selecciones";
+                string query = "SELECT * FROM Selecciones ORDER BY nombre";
                 selecciones = connection.Query<Selecciones>(query).ToList();
             }
             return selecciones;
@@ -61,16 +61,16 @@ namespace TP04_ALBUM.Models
             {
                 foreach (int figurita in figuritas)
                 {
-                    string query ="";
-                    if (DevolverFiguritaUsuario(figurita) ==null)
+                    string query = "";
+                    if (DevolverFiguritaUsuario(figurita) == null)
                     {
-                         query= "INSERT INTO FiguritaXUsuario (IdFigurita,cantidad) Values (@pfigurita,1)";    
+                        query = "INSERT INTO FiguritaXUsuario (IdFigurita,cantidad) Values (@pfigurita,1)";
                     }
                     else
                     {
-                        query = "UPDATE FiguritaXUsuario SET cantidad = cantidad+1 WHERE idFigurita = @pfigurita";    
+                        query = "UPDATE FiguritaXUsuario SET cantidad = cantidad+1 WHERE idFigurita = @pfigurita";
                     }
-                    
+
                     connection.Execute(query, new { pfigurita = figurita });
                 }
             }
@@ -81,16 +81,16 @@ namespace TP04_ALBUM.Models
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 string query = "SELECT * FROM FiguritaXUsuario WHERE idFigurita = @pid";
-                figurita = connection.QueryFirstOrDefault<FiguritaXUsuario>(query, new {pid = figuritaid});
+                figurita = connection.QueryFirstOrDefault<FiguritaXUsuario>(query, new { pid = figuritaid });
             }
             return figurita;
         }
         public List<Figurita> DevolverAlbum()
         {
             List<Figurita> album = new List<Figurita>();
-            using(SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = @"SELECT f.*FROM Figuritas f INNER JOIN FiguritaXUsuario fxu ON f.idFiguritas = fxu.idFigurita";
+                string query = @"SELECT f.* FROM Figuritas f INNER JOIN FiguritaXUsuario fxu ON f.idFigurita = fxu.idFigurita";
                 album = connection.Query<Figurita>(query).ToList();
             }
             return album;

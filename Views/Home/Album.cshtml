@@ -1,9 +1,17 @@
-<h1>Mi Álbum</h1>
-@foreach(var f in ViewBag.Figuritas)
+<a href="@Url.Action("Index", "Home")" class="btn-volver">← Volver al inicio</a>
+
+@foreach (var grupo in ViewBag.Album)
 {
-    <div class="figurita">
-        <img src="@f.img" width="150">
-        <h3>Nombre del jugador: @f.nombre</h3>
-        <p>Número de camiseta: @f.numeroCamiseta</p>
+    <h2>@grupo.Key.nombre</h2>
+    <div class="album-container">
+        @foreach (Figurita f in grupo.Value)
+        {
+            <div class="figurita-card">
+                <img src="/@f.img" width="150">
+                <h3>@f.nombre</h3>
+                <p>@f.numeroCamiseta</p>
+                <p class="figurita-cantidad">Tenés: @ViewBag.Cantidades[f.idFigurita]</p>
+            </div>
+        }
     </div>
 }

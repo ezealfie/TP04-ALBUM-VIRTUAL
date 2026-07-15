@@ -13,6 +13,7 @@ namespace TP04_ALBUM.Models
         public string descripcion { get; set; }
         public int idSeleccion { get; set; }
         public string numeroCamiseta { get; set; }
+    public string nombreSeleccion { get; set; }  
 
         public Figurita() 
         {

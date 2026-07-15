@@ -23,6 +23,7 @@ public class HomeController : Controller
         List<Figurita> figuritas = bd.DevolverFiguritas();
         Random rnd = new Random();
         List<Figurita> sobre = new List<Figurita>();
+
         while (sobre.Count < 5)
         {
             Figurita f = figuritas[rnd.Next(figuritas.Count)];
@@ -31,28 +32,50 @@ public class HomeController : Controller
                 sobre.Add(f);
             }
         }
+
+        List<int> idsSobre = new List<int>();
+        foreach (Figurita f in sobre)
+        {
+            idsSobre.Add(f.idFigurita);
+        }
+
+        bd.agregarFiguritas(idsSobre);
+
         ViewBag.Sobre = sobre;
         return View();
     }
-
-    /*public IActionResult GuardarSobres(List<int> figuritasSobre)
-    {
-        BD bd = new BD();
-        List<Figurita> Figuritas = new List<Figurita>();
-        System.Console.WriteLine(figuritasSobre.Count);
-        bd.agregarFiguritas(figuritasSobre);
-        foreach (int figurita in figuritasSobre)
-        {
-        Figuritas.Add(bd.DevolverFigurita(figurita));
-        }
-    System.Console.WriteLine(Figuritas.Count);
-        ViewBag.figuritas = Figuritas;
-        return View("Sobre");
-    }*/
     public IActionResult Album()
     {
         BD bd = new BD();
-        ViewBag.Figuritas = bd.DevolverAlbum();
+        List<Figurita> figuritas = bd.DevolverAlbum();
+        List<Selecciones> selecciones = bd.DevolverSelecciones();
+        List<FiguritaXUsuario> figuritasXUsuario = bd.DevolverFiguritasXUsuario();
+
+        Dictionary<int, int> cantidades = new Dictionary<int, int>();
+        foreach (FiguritaXUsuario fxu in figuritasXUsuario)
+        {
+            cantidades[fxu.idFigurita] = fxu.cantidad;
+        }
+
+        Dictionary<Selecciones, List<Figurita>> agrupado = new Dictionary<Selecciones, List<Figurita>>();
+        foreach (Selecciones s in selecciones)
+        {
+            List<Figurita> figuritasDeSeleccion = new List<Figurita>();
+            foreach (Figurita f in figuritas)
+            {
+                if (f.idSeleccion == s.idSeleccion)
+                {
+                    figuritasDeSeleccion.Add(f);
+                }
+            }
+            if (figuritasDeSeleccion.Count > 0)
+            {
+                agrupado.Add(s, figuritasDeSeleccion);
+            }
+        }
+
+        ViewBag.Album = agrupado;
+        ViewBag.Cantidades = cantidades;
         return View();
     }
 
