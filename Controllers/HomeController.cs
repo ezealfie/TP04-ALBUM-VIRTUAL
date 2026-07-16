@@ -47,7 +47,7 @@ public class HomeController : Controller
     public IActionResult Album()
     {
         BD bd = new BD();
-        List<Figurita> figuritas = bd.DevolverAlbum();
+        List<Figurita> figuritas = bd.DevolverFiguritas();
         List<Selecciones> selecciones = bd.DevolverSelecciones();
         List<FiguritaXUsuario> figuritasXUsuario = bd.DevolverFiguritasXUsuario();
 

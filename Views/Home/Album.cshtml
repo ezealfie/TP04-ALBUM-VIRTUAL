@@ -6,11 +6,27 @@
     <div class="album-container">
         @foreach (Figurita f in grupo.Value)
         {
-            <div class="figurita-card">
-                <img src="/@f.img" width="150">
-                <h3>@f.nombre</h3>
-                <p>@f.numeroCamiseta</p>
-                <p class="figurita-cantidad">Tenés: @ViewBag.Cantidades[f.idFigurita]</p>
+            bool tengo = ViewBag.Cantidades.ContainsKey(f.idFigurita);
+            string claseCard = "figurita-card";
+            if (!tengo)
+            {
+                claseCard = "figurita-card figurita-faltante";
+            }
+            <div class="@claseCard">
+                @if (tengo)
+                {
+                    <img src="/@f.img" width="150">
+                    <h3>@f.nombre</h3>
+                    <p>@f.numeroCamiseta</p>
+                    <p class="figurita-cantidad">Tenés: @ViewBag.Cantidades[f.idFigurita]</p>
+                }
+                else
+                {
+                    <div class="figurita-silueta">?</div>
+                    <h3>???</h3>
+                    <p>@f.numeroCamiseta</p>
+                    <p class="figurita-falta">Falta</p>
+                }
             </div>
         }
     </div>
